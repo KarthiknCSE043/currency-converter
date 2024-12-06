@@ -1,0 +1,24 @@
+from forex_python.converter import CurrencyRates, CurrencyCodes
+from forex_python.bitcoin import BtcConverter
+
+def currency_converter():
+    c = CurrencyRates()
+    cc = CurrencyCodes()
+    
+    print("Welcome to the Currency Converter!")
+    print("Enter the currencies in ISO 4217 format (e.g., USD, EUR, INR).")
+    
+    base_currency = input("Enter the base currency: ").upper()
+    target_currency = input("Enter the target currency: ").upper()
+    
+    try:
+        amount = float(input(f"Enter the amount in {base_currency}: "))
+        converted_amount = c.convert(base_currency, target_currency, amount)
+        symbol = cc.get_symbol(target_currency)
+        
+        print(f"\nConversion Result: {symbol}{converted_amount:.2f}")
+    except Exception as e:
+        print(f"Error: {e}")
+    
+if __name__ == "__main__":
+    currency_converter()
